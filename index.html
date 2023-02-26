@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mes Points de Permis</title>
+  </head>
+  <body>
+    <h1>Mes Points de Permis</h1>
+
+    <p>Entrez une infraction avec perte de points : </p>
+    <label for="point-amount">Points perdus : </label>
+        <select id="point-amount">
+            <option value=1 selected>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=6>6</option>
+        </select>
+    <label for="classe">Classe : </label>
+
+        <select id="classe">
+            <option value=1 selected>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+        </select>
+
+    <label for="date-issued">Date reçue:</label>
+
+    <input type="date" id="date-issued"
+            value="2023-01-01"
+            min="1992-07-01">
+
+
+    <button id="add-infraction">Ajouter</button>
+    <br>
+    <button id="reset-infractions">Reset</button>
+
+    <p>Total: <span id="total-points"></span></p>
+
+    <div id="results"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
