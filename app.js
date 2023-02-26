@@ -1,6 +1,10 @@
 const pointInput = document.getElementById('point-amount');
 const classeInput = document.getElementById('classe');
 const dateInput = document.getElementById("date-issued")
+const resultsDiv = document.getElementById("results");
+const inputDiv = document.getElementById("input");
+const addInfractionButton = document.getElementById('add-infraction');
+const resetInfractionButton = document.getElementById('reset-infractions');
 
 var today = new Date();
 var dd = today.getDate();
@@ -18,9 +22,7 @@ if (mm < 10) {
 today = yyyy + '-' + mm + '-' + dd;
 dateInput.setAttribute("max", today);
 
-const addInfractionButton = document.getElementById('add-infraction');
 
-const resetInfractionButton = document.getElementById('reset-infractions');
 
 let totalPointsPerdus = 0;
 let numContraventions = 0;
@@ -46,29 +48,44 @@ addInfractionButton.addEventListener('click', () => {
   const dateContravention = dateInput.value
 
   totalPointsPerdus += pointPerdus;
-  numContraventions += 1;
 
-  const contravention = new Contravention(dateContravention, classe, pointPerdus);
+  if (totalPointsPerdus >= 12) {
+    var inputMessage = document.createElement("div")
+    inputMessage.setAttribute("id", "points-epuises")
+    inputMessage.innerText = "Vous avez perdus tous vos points ! Le permis est invalide."
+    inputDiv.appendChild(inputMessage);
 
-  listContraventions.push(contravention)
+    addInfractionButton.disabled = true;
+  } 
+  if (totalPointsPerdus <= 12) {
+
+    numContraventions += 1;
+
+    const contravention = new Contravention(dateContravention, classe, pointPerdus);
+
+    listContraventions.push(contravention)
 
 
-  const totalPointsDisplay = document.getElementById('total-points');
+    const totalPointsDisplay = document.getElementById('total-points');
 
-  totalPointsDisplay.textContent = totalPointsPerdus;
+    totalPointsDisplay.textContent = totalPointsPerdus;
 
-  pointInput.value = 1;
+    pointInput.value = 1;
+    
+
+    classeInput.value = 1;
+
+    dateContravention.value = today
+
+    
+    
+    var resultItem = document.createElement("p");
+    resultItem.innerText = contravention.printContravention();
+    resultsDiv.appendChild(resultItem);
+
+  }
+
   
-
-  classeInput.value = 1;
-
-  dateContravention.value = today
-
-  var resultsDiv = document.getElementById("results");
-  
-  var resultItem = document.createElement("p");
-  resultItem.innerText = contravention.printContravention();
-  resultsDiv.appendChild(resultItem);
 });
 
 resetInfractionButton.addEventListener('click', () => {
@@ -84,5 +101,13 @@ resetInfractionButton.addEventListener('click', () => {
 
     const totalPointsDisplay = document.getElementById('total-points');
     totalPointsDisplay.textContent = totalPointsPerdus;
+
+    addInfractionButton.disabled = false;
+
+    pointsEpuisesMessage = document.getElementById("points-epuises")
+
+    if (pointsEpuisesMessage) {
+        inputDiv.removeChild(pointsEpuisesMessage)
+    }
 
 });
