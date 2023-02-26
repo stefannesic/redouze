@@ -1,6 +1,6 @@
 const pointInput = document.getElementById('point-amount');
 const classeInput = document.getElementById('classe');
-
+const dateInput = document.getElementById("date-issued")
 
 var today = new Date();
 var dd = today.getDate();
@@ -16,7 +16,7 @@ if (mm < 10) {
 } 
     
 today = yyyy + '-' + mm + '-' + dd;
-document.getElementById("date-issued").setAttribute("max", today);
+dateInput.setAttribute("max", today);
 
 const addInfractionButton = document.getElementById('add-infraction');
 
@@ -29,6 +29,7 @@ let numContraventions = 0;
 addInfractionButton.addEventListener('click', () => {
   const pointPerdus = Number(pointInput.value);
   const classe = Number(classeInput.value);
+  const dateContravention = dateInput.value
 
 
   totalPointsPerdus += pointPerdus;
@@ -44,10 +45,12 @@ addInfractionButton.addEventListener('click', () => {
 
   classeInput.value = 1;
 
+  dateContravention.value = today
+
   var resultsDiv = document.getElementById("results");
   
   var resultItem = document.createElement("p");
-  resultItem.innerText = "Contravention #" + numContraventions + " de Classe " + classe + " (Perte de " + pointPerdus + " points).";
+  resultItem.innerText = dateContravention + " : Contravention #" + numContraventions + " de Classe " + classe + " (Perte de " + pointPerdus + " points).";
   resultsDiv.appendChild(resultItem);
 });
 
