@@ -2,51 +2,59 @@
 <html>
   <head>
     <title>Mes Points de Permis</title>
+
   </head>
   <body>
+
     <h1>Mes Points de Permis</h1>
 
     <div id="input">
-        Entrez une infraction avec perte de points : 
-        <br>
-        <label for="date-issued">Date reçue:</label>
 
-        <input type="date" id="date-issued"
-                value="2023-01-01"
-                min="1992-07-01">
-    
-    
-        <label for="classe">Classe : </label>
-    
-        <select id="classe">
-            <option value=1 selected>1</option>
-            <option value=2>2</option>
-            <option value=3>3</option>
-            <option value=4>4</option>
-            <option value=5>5</option>
-        </select>
-    
-    
-        <label for="point-amount">Points perdus : </label>
-            <select id="point-amount">
-                <option value=1 selected>1</option>
-                <option value=2>2</option>
-                <option value=3>3</option>
-                <option value=4>4</option>
-                <option value=6>6</option>
-            </select>
-    
-        <button id="add-infraction">Ajouter</button>
-    </div>
+      <div id="form">
+          Entrez une infraction avec perte de points : 
+          <br>
+          <label for="date-issued">Date reçue:</label>
 
-   
-    <br>
-    <button id="reset-infractions">Reset</button>
+          <input type="date" id="date-issued"
+                  value="2023-01-01"
+                  min="1992-07-01">
+      
+      
+          <label for="classe">Classe : </label>
+      
+          <select id="classe">
+              <option value=1 selected>1</option>
+              <option value=2>2</option>
+              <option value=3>3</option>
+              <option value=4>4</option>
+              <option value=5>5</option>
+          </select>
+      
+      
+          <label for="point-amount">Points perdus : </label>
+              <select id="point-amount">
+                  <option value=1 selected>1</option>
+                  <option value=2>2</option>
+                  <option value=3>3</option>
+                  <option value=4>4</option>
+                  <option value=6>6</option>
+              </select>
+      
+          <button id="add-infraction">Ajouter</button>
+      </div>
 
-    <p>Total: <span id="total-points"></span></p>
+    
+      <br>
 
-    <div id="results"></div>
+      <p>Total: <span id="total-points"></span></p>
 
-    <script src="app.js"></script>
+      <div id="results"></div>
+      <button id="submit-infractions" disabled>Soumettre</button>
+
+    <div>
+
+    
+      <button id="reset-infractions" disabled>Reset</button>
+      <script src="app.js"></script>
   </body>
 </html>
