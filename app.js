@@ -22,18 +22,35 @@ const addInfractionButton = document.getElementById('add-infraction');
 
 const resetInfractionButton = document.getElementById('reset-infractions');
 
-// initialize the total fines received variable to 0
 let totalPointsPerdus = 0;
 let numContraventions = 0;
+let listContraventions = [];
+
+class Contravention {
+    constructor(date, classe, points) {
+      this.id = numContraventions 
+      this.date = date;
+      this.classe = classe;
+      this.points = points;
+    }
+  
+    printContravention() {
+      return this.date + " : Contravention #" + this.id + " de Classe " + this.classe + " (Perte de " + this.points + " points).";
+    }
+}
+  
 
 addInfractionButton.addEventListener('click', () => {
   const pointPerdus = Number(pointInput.value);
   const classe = Number(classeInput.value);
   const dateContravention = dateInput.value
 
-
   totalPointsPerdus += pointPerdus;
   numContraventions += 1;
+
+  const contravention = new Contravention(dateContravention, classe, pointPerdus);
+
+  listContraventions.push(contravention)
 
 
   const totalPointsDisplay = document.getElementById('total-points');
@@ -50,7 +67,7 @@ addInfractionButton.addEventListener('click', () => {
   var resultsDiv = document.getElementById("results");
   
   var resultItem = document.createElement("p");
-  resultItem.innerText = dateContravention + " : Contravention #" + numContraventions + " de Classe " + classe + " (Perte de " + pointPerdus + " points).";
+  resultItem.innerText = contravention.printContravention();
   resultsDiv.appendChild(resultItem);
 });
 
@@ -58,8 +75,12 @@ resetInfractionButton.addEventListener('click', () => {
     totalPointsPerdus = 0;
     numContraventions = 0;
 
+    listContraventions = []
+
     var resultsDiv = document.getElementById("results");
     resultsDiv.innerHTML = ""
+
+
 
     const totalPointsDisplay = document.getElementById('total-points');
     totalPointsDisplay.textContent = totalPointsPerdus;
